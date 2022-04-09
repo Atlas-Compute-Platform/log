@@ -9,19 +9,19 @@ import (
 )
 
 func apiReset(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w = lib.SetCors(w)
 	msgBuf = make([]string, 0, 160)
 }
 
-func apiPrint(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+func apiList(w http.ResponseWriter, r *http.Request) {
+	w = lib.SetCors(w)
 	for _, v := range msgBuf {
 		fmt.Fprintf(w, "%s\n", v)
 	}
 }
 
 func apiLog(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w = lib.SetCors(w)
 	var (
 		err error
 		svc string
@@ -29,7 +29,7 @@ func apiLog(w http.ResponseWriter, r *http.Request) {
 		req = make(lib.Dict)
 	)
 
-	if req, err = lib.LoadDict(r.Body); err != nil {
+	if req, err = lib.ReceiveDict(r.Body); err != nil {
 		lib.LogError(os.Stderr, "main.apiLog", err)
 		return
 	}

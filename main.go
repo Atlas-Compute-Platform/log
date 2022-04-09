@@ -1,7 +1,7 @@
 package main
 
 /*
-	Atlas Logs
+	Atlas Logging Service
 	Thijs Haker
 */
 
@@ -17,7 +17,7 @@ import (
 var msgBuf []string
 
 func usage() {
-	fmt.Fprintf(os.Stderr, "Atlas Logs %s\n", lib.VERS)
+	fmt.Fprintf(os.Stderr, "Atlas Logging Service %s\n", lib.VERS)
 	flag.PrintDefaults()
 	os.Exit(1)
 }
@@ -29,7 +29,7 @@ func main() {
 
 	http.HandleFunc("/ping", lib.ApiPing)
 	http.HandleFunc("/reset", apiReset)
-	http.HandleFunc("/print", apiPrint)
+	http.HandleFunc("/list", apiList)
 	http.HandleFunc("/log", apiLog)
 
 	http.ListenAndServe(*netAddr, nil)
