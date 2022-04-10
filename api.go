@@ -5,23 +5,23 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/Atlas-Compute-Environment/lib"
+	"github.com/Atlas-Compute-Platform/lib"
 )
 
 func apiReset(w http.ResponseWriter, r *http.Request) {
-	w = lib.SetCors(w)
-	msgBuf = make([]string, 0, 160)
+	lib.SetCors(&w)
+	logBuf = make([]string, 0, 160)
 }
 
 func apiList(w http.ResponseWriter, r *http.Request) {
-	w = lib.SetCors(w)
-	for _, v := range msgBuf {
+	lib.SetCors(&w)
+	for _, v := range logBuf {
 		fmt.Fprintf(w, "%s\n", v)
 	}
 }
 
 func apiLog(w http.ResponseWriter, r *http.Request) {
-	w = lib.SetCors(w)
+	lib.SetCors(&w)
 	var (
 		err error
 		svc string
@@ -34,7 +34,7 @@ func apiLog(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	svc = req[lib.KV_SVC]
-	msg = req[lib.KV_MSG]
-	msgBuf = append(msgBuf, fmt.Sprintf("%s: %s", svc, msg))
+	svc = req[lib.KEY_SVC]
+	msg = req[lib.KEY_MSG]
+	logBuf = append(logBuf, fmt.Sprintf("%s: %s", svc, msg))
 }

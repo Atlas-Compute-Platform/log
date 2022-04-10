@@ -11,10 +11,10 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/Atlas-Compute-Environment/lib"
+	"github.com/Atlas-Compute-Platform/lib"
 )
 
-var msgBuf []string
+var logBuf []string
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "Atlas Logging Service %s\n", lib.VERS)
