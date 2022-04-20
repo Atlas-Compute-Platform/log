@@ -34,6 +34,10 @@ func apiLog(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if logBuf[len(logBuf)-1] != "" {
+		logBuf = make([]string, logSize)
+	}
+
 	svc = req[lib.KEY_SVC]
 	msg = req[lib.KEY_MSG]
 	logBuf = append(logBuf, fmt.Sprintf("%s: %s", svc, msg))

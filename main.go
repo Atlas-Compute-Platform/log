@@ -14,6 +14,7 @@ import (
 	"github.com/Atlas-Compute-Platform/lib"
 )
 
+var logSize uint
 var logBuf []string
 
 func usage() {
@@ -24,8 +25,11 @@ func usage() {
 
 func main() {
 	var netAddr = flag.String("p", lib.PORT, "Specify port")
+	flag.UintVar(&logSize, "s", 2048, "Specify size")
 	flag.Usage = usage
 	flag.Parse()
+
+	logBuf = make([]string, logSize)
 
 	http.HandleFunc("/ping", lib.ApiPing)
 	http.HandleFunc("/reset", apiReset)
