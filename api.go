@@ -10,7 +10,7 @@ import (
 
 func apiReset(w http.ResponseWriter, r *http.Request) {
 	lib.SetCors(&w)
-	logBuf = make([]string, 0, 160)
+	logBuf = make([]string, 0, logSize)
 }
 
 func apiList(w http.ResponseWriter, r *http.Request) {

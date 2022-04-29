@@ -7,9 +7,7 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"net/http"
-	"os"
 
 	"github.com/Atlas-Compute-Platform/lib"
 )
@@ -17,16 +15,13 @@ import (
 var logSize uint
 var logBuf []string
 
-func usage() {
-	fmt.Fprintf(os.Stderr, "Atlas Logging Service %s\n", lib.VERS)
-	flag.PrintDefaults()
-	os.Exit(1)
-}
-
 func main() {
+	lib.SvcName = "Atlas Logging Service"
+	lib.SvcVers = "1.0"
+
 	var netAddr = flag.String("p", lib.PORT, "Specify port")
 	flag.UintVar(&logSize, "s", 2048, "Specify size")
-	flag.Usage = usage
+	flag.Usage = lib.Usage
 	flag.Parse()
 
 	logBuf = make([]string, logSize)
