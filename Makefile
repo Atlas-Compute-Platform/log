@@ -1,5 +1,5 @@
 # Atlas Makefile
-imageName = atlog
+imageName = thedevtop/atlog:latest
 help:
 	@echo 'build: Build exectuable'
 	@echo 'clean: Remove exectuable'
